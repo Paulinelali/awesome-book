@@ -29,5 +29,6 @@ function addBook() {
     book.appendChild(removeBtn);
     books.appendChild(book);
 
+    localStorage.setItem('booklist', JSON.stringify(booklist))
     document.querySelector('.add-book-form').reset();
 }
