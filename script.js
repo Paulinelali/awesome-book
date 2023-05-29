@@ -15,7 +15,7 @@ function removeBook(book) {
   booklist.splice(x, 1);
   localStorage.setItem('booklist', JSON.stringify(booklist));
 }
-
+let teal = true;
 function appendToDOM(title, author) {
   const bookObj = {
     title,
@@ -25,8 +25,7 @@ function appendToDOM(title, author) {
   const book = document.createElement('div');
   book.classList.add('book');
   book.innerHTML = `
-    <p>${bookObj.title}</p>
-    <p>${bookObj.author}</p>
+    <p>"${bookObj.title}" by ${bookObj.author}</p>
     `;
 
   const removeBtn = document.createElement('button');
@@ -37,6 +36,15 @@ function appendToDOM(title, author) {
     removeBook(bookObj);
     localStorage.setItem('booklist', JSON.stringify(booklist));
   });
+
+  if (teal) {
+    book.classList.add('teal');
+    removeBtn.classList.add('teal-btn');
+    teal = false;
+  } else {
+    teal = true;
+  };
+
   book.appendChild(removeBtn);
   books.appendChild(book);
 }
