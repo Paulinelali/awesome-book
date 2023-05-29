@@ -1,16 +1,29 @@
 const addBookBtn = document.querySelector('.add-book');
 const bookName = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
+const form = document.querySelector('.add-book-form');
+
+//Check local storage for booklist
+let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
+if (booklist.length > 0) {
+    booklist.forEach(book => {
+        bookName.value = book.title;
+        bookAuthor.value = book.author;
+        addBook();
+        form.reset();
+    });
+};
+
 addBookBtn.addEventListener('click', addBook)
 
-let bookList = [];
 
 function addBook() {
     const bookObj = {
         title: bookName.value,
         author: bookAuthor.value,
     }
-    bookList.push(bookObj);
+    booklist.push(bookObj);
+    localStorage.setItem('booklist', JSON.stringify(booklist))
 
     const books = document.querySelector('.books');
     console.log(books);
@@ -29,6 +42,7 @@ function addBook() {
     book.appendChild(removeBtn);
     books.appendChild(book);
 
-    localStorage.setItem('booklist', JSON.stringify(booklist))
-    document.querySelector('.add-book-form').reset();
+    form.reset();
 }
+
+// localStorage.clear();
