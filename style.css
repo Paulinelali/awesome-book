@@ -2,8 +2,26 @@ form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 10px;
 }
 
 form * {
-  margin-block: 4px;
+  margin-block: 8px;
 }
+
+p {
+  margin: 0;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 1px solid;
+  padding-top: 12px;
+}
+
+.remove-btn {
+  margin-block: 8px;
+}
+

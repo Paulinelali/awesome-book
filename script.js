@@ -31,6 +31,7 @@ function appendToDOM(title, author) {
 
   const removeBtn = document.createElement('button');
   removeBtn.innerHTML = 'Remove';
+  removeBtn.classList.add('remove-btn');
   removeBtn.addEventListener('click', () => {
     book.remove();
     removeBook(bookObj);
