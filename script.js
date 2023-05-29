@@ -20,7 +20,6 @@ function appendToDOM(title, author) {
         author: author,
     };
     const books = document.querySelector('.books');
-    console.log(books);
     const book = document.createElement('div');
     book.classList.add('book');
     book.innerHTML = `
@@ -31,7 +30,9 @@ function appendToDOM(title, author) {
     const removeBtn = document.createElement('button');
     removeBtn.innerHTML = 'Remove';
     removeBtn.addEventListener('click', () => {
-        //remove book from bookList
+        book.remove();
+        removeBook(bookObj);
+        localStorage.setItem('booklist', JSON.stringify(booklist));
     });
     book.appendChild(removeBtn);
     books.appendChild(book);
@@ -41,15 +42,30 @@ addBookBtn.addEventListener('click', addBook)
 
 
 function addBook() {
+    if (bookName.value !== '' && bookAuthor.value !== '') {
+        
+    
     const bookObj = {
         title: bookName.value,
         author: bookAuthor.value,
     }
+
     booklist.push(bookObj);
     localStorage.setItem('booklist', JSON.stringify(booklist));
     appendToDOM(bookObj.title, bookObj.author);
 
     form.reset();
 }
+}
 
-// localStorage.clear();
+// localStorage;
+function removeBook(book) {
+    let x = 0;
+    for (let i = 0; i < booklist.length; i += 1) {
+        if (booklist[i].title === book.title) {
+            x = i;
+        }
+    }
+    booklist.splice(x, 1);
+    localStorage.setItem('booklist', JSON.stringify(booklist));
+}
