@@ -2,8 +2,46 @@ const addBookBtn = document.querySelector('.add-book');
 const bookName = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
 const form = document.querySelector('.add-book-form');
-
+​
 let booklist = [];
+​
+class book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
+​
+  getTitle() {
+    return this.title;
+  }
+​
+  getAuthor() {
+    return this.author;
+  }
+};
+​
+class bookshelf {
+  constructor() {
+    this.booklist = [];
+    this.teal = true;
+  }
+​
+  addBook(book) {
+    if (book.getTitle() !== '' && book.getAuthor() !== '') {
+      const bookObj = {
+        title: this.title,
+        author: this.author,
+      };
+      this.booklist.push(book);
+      console.log(this.booklist);
+      localStorage.setItem('booklist', JSON.stringify(this.booklist));
+      this.appendToDOM(book);
+      form.reset();
+    };
+  }
+}
+
+
 
 function removeBook(book) {
   let x = 0;
@@ -75,3 +113,5 @@ function addBook() {
   }
 }
 addBookBtn.addEventListener('click', addBook);
+
+// 
