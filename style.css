@@ -19,7 +19,13 @@ nav {
 }
 
 nav h1 {
-  margin-left: 16px;
+  margin-left: 32px;
+}
+
+nav h1:hover {
+  cursor: pointer;
+  color: rgb(0, 65, 65);
+  transform: scale(1.1);
 }
 
 nav ul {
