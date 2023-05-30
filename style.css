@@ -1,26 +1,94 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+hr {
+  width: 15%;
+  border: 1px solid teal;
+  margin-top: 32px;
+}
+
 form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 10px;
+  width: 30%;
 }
 
 form * {
   margin-block: 8px;
 }
 
+input {
+  width: 98%;
+  height: 30px;
+}
+
+.add-book {
+  align-self: flex-end;
+  border: 2px solid teal;
+  background-color: #fff;
+  color: teal;
+  height: 30px;
+  width: 100px;
+}
+
+.add-book:hover {
+  background-color: teal;
+  color: #fff;
+}
+
 p {
   margin: 0;
 }
 
+.books {
+  border: 2px solid teal;
+  width: 100%;
+}
+
+.teal {
+  background-color: rgba(0, 128, 128, 0.5);
+}
+
 .book {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   border-bottom: 1px solid;
   padding-top: 12px;
 }
 
+.book p {
+  width: 90%;
+  margin-left: 8px;
+}
+
 .remove-btn {
   margin-block: 8px;
+  justify-self: center;
+  height: 30px;
+  width: 100px;
+  margin-right: 16px;
+  background-color: #fff;
+  border: 2px solid teal;
+}
+
+.remove-btn:hover {
+  background-color: teal;
+  color: #fff;
+}
+
+.teal-btn {
+  background-color: rgba(0, 128, 128, 0.5);
+  color: #fff;
+}
+
+.teal-btn:hover {
+  background-color: #fff;
+  color: teal;
 }

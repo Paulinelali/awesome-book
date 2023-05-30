@@ -1,69 +1,98 @@
+/* eslint-disable max-classes-per-file */
 const addBookBtn = document.querySelector('.add-book');
 const bookName = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
 const form = document.querySelector('.add-book-form');
 
-let booklist = [];
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
 
-function removeBook(book) {
-  let x = 0;
-  for (let i = 0; i < booklist.length; i += 1) {
-    if (booklist[i].title === book.title) {
-      x = i;
+  getTitle() {
+    return this.title;
+  }
+
+  getAuthor() {
+    return this.author;
+  }
+}
+
+class Bookshelf {
+  constructor() {
+    this.booklist = [];
+    this.teal = true;
+  }
+
+  addBook(book) {
+    if (book.getTitle() !== '' && book.getAuthor() !== '') {
+      this.booklist.push(book);
+      localStorage.setItem('booklist', JSON.stringify(this.booklist));
+      this.appendToDOM(book);
+      form.reset();
     }
   }
-  booklist.splice(x, 1);
-  localStorage.setItem('booklist', JSON.stringify(booklist));
-}
 
-function appendToDOM(title, author) {
-  const bookObj = {
-    title,
-    author,
-  };
-  const books = document.querySelector('.books');
-  const book = document.createElement('div');
-  book.classList.add('book');
-  book.innerHTML = `
-    <p>${bookObj.title}</p>
-    <p>${bookObj.author}</p>
-    `;
+  removeBook(book) {
+    let x = 0;
+    for (let i = 0; i < this.booklist.length; i += 1) {
+      if (this.booklist[i].title === book.title) {
+        x = i;
+      }
+    }
+    this.booklist.splice(x, 1);
+    localStorage.setItem('booklist', JSON.stringify(this.booklist));
+  }
 
-  const removeBtn = document.createElement('button');
-  removeBtn.innerHTML = 'Remove';
-  removeBtn.classList.add('remove-btn');
-  removeBtn.addEventListener('click', () => {
-    book.remove();
-    removeBook(bookObj);
-    localStorage.setItem('booklist', JSON.stringify(booklist));
-  });
-  book.appendChild(removeBtn);
-  books.appendChild(book);
-}
+  appendToDOM(bookObj) {
+    const books = document.querySelector('.books');
+    const book = document.createElement('div');
+    book.classList.add('book');
+    book.innerHTML = `
+      <p>"${bookObj.title}" by ${bookObj.author}</p>
+      `;
 
-// Check local storage for booklist
+    const removeBtn = document.createElement('button');
+    removeBtn.innerHTML = 'Remove';
+    removeBtn.classList.add('remove-btn');
+    removeBtn.addEventListener('click', () => {
+      book.remove();
+      this.removeBook(bookObj);
+      localStorage.setItem('booklist', JSON.stringify(this.booklist));
+    });
 
-if (localStorage.getItem('booklist') !== null) {
-  booklist = JSON.parse(localStorage.getItem('booklist'));
-}
-if (booklist.length > 0) {
-  booklist.forEach((book) => {
-    appendToDOM(book.title, book.author);
-  });
-}
+    if (this.teal) {
+      book.classList.add('teal');
+      removeBtn.classList.add('teal-btn');
+      this.teal = false;
+    } else {
+      this.teal = true;
+    }
 
-function addBook() {
-  if (bookName.value !== '' && bookAuthor.value !== '') {
-    const bookObj = {
-      title: bookName.value,
-      author: bookAuthor.value,
-    };
+    book.appendChild(removeBtn);
+    books.appendChild(book);
+  }
 
-    booklist.push(bookObj);
-    localStorage.setItem('booklist', JSON.stringify(booklist));
-    appendToDOM(bookObj.title, bookObj.author);
+  getBooklist() {
+    return this.booklist;
+  }
 
-    form.reset();
+  setBooklist(booklist) {
+    this.booklist = booklist;
+    booklist.forEach((bookObj) => {
+      this.appendToDOM(bookObj);
+    });
   }
 }
-addBookBtn.addEventListener('click', addBook);
+
+const bookShelf = new Bookshelf();
+if (localStorage.getItem('booklist') !== null && localStorage.getItem('booklist').length > 0) {
+  bookShelf.setBooklist(JSON.parse(localStorage.getItem('booklist')));
+}
+addBookBtn.addEventListener('click', () => {
+  const title = bookName.value;
+  const author = bookAuthor.value;
+  const newBook = new Book(title, author);
+  bookShelf.addBook(newBook);
+});
