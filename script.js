@@ -41,8 +41,8 @@ class Bookshelf {
         x = i;
       }
     }
-    booklist.splice(x, 1);
-    localStorage.setItem('booklist', JSON.stringify(booklist));
+    this.booklist.splice(x, 1);
+    localStorage.setItem('booklist', JSON.stringify(this.booklist));
   }
 
   appendToDOM(bookObj) {
@@ -59,7 +59,7 @@ class Bookshelf {
     removeBtn.addEventListener('click', () => {
       book.remove();
       this.removeBook(bookObj);
-      localStorage.setItem('booklist', JSON.stringify(booklist));
+      localStorage.setItem('booklist', JSON.stringify(this.booklist));
     });
 
     if (this.teal) {
