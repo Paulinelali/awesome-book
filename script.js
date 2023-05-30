@@ -120,13 +120,15 @@ formToggle.addEventListener('click', () => {
     form.reset();
   });
 
+});
 
+const logo = document.querySelector('#logo');
+logo.addEventListener('click', () => {
+  bookShelf.restockBookshelf();
 });
 
 const restockBtn = document.querySelector('#list');
 restockBtn.addEventListener('click', () => {
   bookShelf.restockBookshelf();
 });
-
-
 // bookShelf.restockBookshelf();
