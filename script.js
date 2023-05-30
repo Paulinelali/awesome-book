@@ -19,7 +19,7 @@ class book {
     return this.author;
   }
 };
-
+/* eslint-disable max-classes-per-file */
 class bookshelf {
   constructor() {
     this.booklist = [];
