@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 const addBookBtn = document.querySelector('.add-book');
 const bookName = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
@@ -19,7 +20,7 @@ class book {
     return this.author;
   }
 };
-/* eslint-disable max-classes-per-file */
+
 class bookshelf {
   constructor() {
     this.booklist = [];
