@@ -2,30 +2,30 @@ const addBookBtn = document.querySelector('.add-book');
 const bookName = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
 const form = document.querySelector('.add-book-form');
-​
+
 let booklist = [];
-​
+
 class book {
   constructor(title, author) {
     this.title = title;
     this.author = author;
   }
-​
+
   getTitle() {
     return this.title;
   }
-​
+
   getAuthor() {
     return this.author;
   }
 };
-​
+
 class bookshelf {
   constructor() {
     this.booklist = [];
     this.teal = true;
   }
-​
+
   addBook(book) {
     if (book.getTitle() !== '' && book.getAuthor() !== '') {
       const bookObj = {
@@ -79,32 +79,28 @@ class bookshelf {
     book.appendChild(removeBtn);
     books.appendChild(book);
   }
-}
-// Check local storage for booklist
+  getBooklist() {
+    return this.booklist;
+  }
 
+  setBooklist(booklist) {
+    this.booklist = booklist;
+    booklist.forEach((bookObj) => {
+      this.appendToDOM(bookObj);
+    });
+  }
+}
+
+const bookShelf = new bookshelf();
 if (localStorage.getItem('booklist') !== null) {
   booklist = JSON.parse(localStorage.getItem('booklist'));
 }
 if (booklist.length > 0) {
-  booklist.forEach((book) => {
-    appendToDOM(book.title, book.author);
-  });
+  bookShelf.setBooklist(booklist);
 }
-
-function addBook() {
-  if (bookName.value !== '' && bookAuthor.value !== '') {
-    const bookObj = {
-      title: bookName.value,
-      author: bookAuthor.value,
-    };
-
-    booklist.push(bookObj);
-    localStorage.setItem('booklist', JSON.stringify(booklist));
-    appendToDOM(bookObj.title, bookObj.author);
-
-    form.reset();
-  }
-}
-addBookBtn.addEventListener('click', addBook);
-
-//
+addBookBtn.addEventListener('click', () => {
+  const title = bookName.value;
+  const author = bookAuthor.value;
+  const newBook = new book(title, author);
+  bookShelf.addBook(newBook);
+});
