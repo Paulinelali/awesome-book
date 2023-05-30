@@ -1,7 +1,4 @@
 /* eslint-disable max-classes-per-file */
-const bookName = document.querySelector('#title');
-const bookAuthor = document.querySelector('#author');
-const form = document.querySelector('.add-book-form');
 const section = document.querySelector('.books');
 
 class Book {
@@ -29,8 +26,6 @@ class Bookshelf {
     if (book.getTitle() !== '' && book.getAuthor() !== '') {
       this.booklist.push(book);
       localStorage.setItem('booklist', JSON.stringify(this.booklist));
-      this.appendToDOM(book);
-      form.reset();
     }
   }
 
@@ -87,7 +82,8 @@ class Bookshelf {
   }
 
   restockBookshelf() {
-
+    document.title = 'Awesome Books | All Books';
+    section.innerHTML = '<h1>All awesome books</h1>';
     this.booklist.forEach((bookObj) => {
       this.appendToDOM(bookObj);
     });
@@ -102,6 +98,7 @@ if (localStorage.getItem('booklist') !== null && localStorage.getItem('booklist'
 const formToggle = document.querySelector('#new');
 section.innerHTML = '';
 formToggle.addEventListener('click', () => {
+  document.title = 'Awesome Books | New Book';
   section.innerHTML = `
     <h2>Add a new book</h2>
     <form class="add-book-form">
@@ -110,17 +107,26 @@ formToggle.addEventListener('click', () => {
       <button type="button" class="add-book">Add</button>
     </form>
   `;
+  const bookName = document.querySelector('#title');
+  const bookAuthor = document.querySelector('#author');
   const addBookBtn = document.querySelector('.add-book');
+  const form = document.querySelector('.add-book-form');
+
   addBookBtn.addEventListener('click', () => {
     const title = bookName.value;
     const author = bookAuthor.value;
     const newBook = new Book(title, author);
     bookShelf.addBook(newBook);
+    form.reset();
   });
+
+
 });
 
 const restockBtn = document.querySelector('#list');
 restockBtn.addEventListener('click', () => {
-  section.innerHTML = '<h1>All awesome books</h1>';
   bookShelf.restockBookshelf();
 });
+
+
+// bookShelf.restockBookshelf();
