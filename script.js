@@ -4,8 +4,6 @@ const bookName = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
 const form = document.querySelector('.add-book-form');
 
-let booklist = [];
-
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -89,11 +87,8 @@ class Bookshelf {
 }
 
 const bookShelf = new Bookshelf();
-if (localStorage.getItem('booklist') !== null) {
-  booklist = JSON.parse(localStorage.getItem('booklist'));
-}
-if (booklist.length > 0) {
-  bookShelf.setBooklist(booklist);
+if (localStorage.getItem('booklist') !== null && localStorage.getItem('booklist').length > 0) {
+  bookShelf.setBooklist(JSON.parse(localStorage.getItem('booklist')));
 }
 addBookBtn.addEventListener('click', () => {
   const title = bookName.value;
