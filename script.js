@@ -6,7 +6,7 @@ const form = document.querySelector('.add-book-form');
 
 let booklist = [];
 
-class book {
+class Book {
   constructor(title, author) {
     this.title = title;
     this.author = author;
@@ -19,9 +19,9 @@ class book {
   getAuthor() {
     return this.author;
   }
-};
+}
 
-class bookshelf {
+class Bookshelf {
   constructor() {
     this.booklist = [];
     this.teal = true;
@@ -29,16 +29,11 @@ class bookshelf {
 
   addBook(book) {
     if (book.getTitle() !== '' && book.getAuthor() !== '') {
-      const bookObj = {
-        title: this.title,
-        author: this.author,
-      };
       this.booklist.push(book);
-      console.log(this.booklist);
       localStorage.setItem('booklist', JSON.stringify(this.booklist));
       this.appendToDOM(book);
       form.reset();
-    };
+    }
   }
 
   removeBook(book) {
@@ -75,11 +70,12 @@ class bookshelf {
       this.teal = false;
     } else {
       this.teal = true;
-    };
+    }
 
     book.appendChild(removeBtn);
     books.appendChild(book);
   }
+
   getBooklist() {
     return this.booklist;
   }
@@ -92,7 +88,7 @@ class bookshelf {
   }
 }
 
-const bookShelf = new bookshelf();
+const bookShelf = new Bookshelf();
 if (localStorage.getItem('booklist') !== null) {
   booklist = JSON.parse(localStorage.getItem('booklist'));
 }
@@ -102,6 +98,6 @@ if (booklist.length > 0) {
 addBookBtn.addEventListener('click', () => {
   const title = bookName.value;
   const author = bookAuthor.value;
-  const newBook = new book(title, author);
+  const newBook = new Book(title, author);
   bookShelf.addBook(newBook);
 });
