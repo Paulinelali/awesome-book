@@ -1,8 +1,8 @@
 /* eslint-disable max-classes-per-file */
-const addBookBtn = document.querySelector('.add-book');
 const bookName = document.querySelector('#title');
 const bookAuthor = document.querySelector('#author');
 const form = document.querySelector('.add-book-form');
+const section = document.querySelector('.books');
 
 class Book {
   constructor(title, author) {
@@ -79,8 +79,16 @@ class Bookshelf {
   }
 
   setBooklist(booklist) {
+    section.innerHTML = '';
     this.booklist = booklist;
     booklist.forEach((bookObj) => {
+      this.appendToDOM(bookObj);
+    });
+  }
+
+  restockBookshelf() {
+
+    this.booklist.forEach((bookObj) => {
       this.appendToDOM(bookObj);
     });
   }
@@ -90,9 +98,29 @@ const bookShelf = new Bookshelf();
 if (localStorage.getItem('booklist') !== null && localStorage.getItem('booklist').length > 0) {
   bookShelf.setBooklist(JSON.parse(localStorage.getItem('booklist')));
 }
-addBookBtn.addEventListener('click', () => {
-  const title = bookName.value;
-  const author = bookAuthor.value;
-  const newBook = new Book(title, author);
-  bookShelf.addBook(newBook);
+
+const formToggle = document.querySelector('#new');
+section.innerHTML = '';
+formToggle.addEventListener('click', () => {
+  section.innerHTML = `
+    <h2>Add a new book</h2>
+    <form class="add-book-form">
+      <input type="text" placeholder="Title" id="title" required>
+      <input type="text" placeholder="Author" id="author" required>
+      <button type="button" class="add-book">Add</button>
+    </form>
+  `;
+  const addBookBtn = document.querySelector('.add-book');
+  addBookBtn.addEventListener('click', () => {
+    const title = bookName.value;
+    const author = bookAuthor.value;
+    const newBook = new Book(title, author);
+    bookShelf.addBook(newBook);
+  });
+});
+
+const restockBtn = document.querySelector('#list');
+restockBtn.addEventListener('click', () => {
+  section.innerHTML = '<h1>All awesome books</h1>';
+  bookShelf.restockBookshelf();
 });
