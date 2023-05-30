@@ -39,54 +39,47 @@ class bookshelf {
       form.reset();
     };
   }
-}
 
-
-
-function removeBook(book) {
-  let x = 0;
-  for (let i = 0; i < booklist.length; i += 1) {
-    if (booklist[i].title === book.title) {
-      x = i;
+  removeBook(book) {
+    let x = 0;
+    for (let i = 0; i < this.booklist.length; i += 1) {
+      if (this.booklist[i].title === book.title) {
+        x = i;
+      }
     }
-  }
-  booklist.splice(x, 1);
-  localStorage.setItem('booklist', JSON.stringify(booklist));
-}
-let teal = true;
-function appendToDOM(title, author) {
-  const bookObj = {
-    title,
-    author,
-  };
-  const books = document.querySelector('.books');
-  const book = document.createElement('div');
-  book.classList.add('book');
-  book.innerHTML = `
-    <p>"${bookObj.title}" by ${bookObj.author}</p>
-    `;
-
-  const removeBtn = document.createElement('button');
-  removeBtn.innerHTML = 'Remove';
-  removeBtn.classList.add('remove-btn');
-  removeBtn.addEventListener('click', () => {
-    book.remove();
-    removeBook(bookObj);
+    booklist.splice(x, 1);
     localStorage.setItem('booklist', JSON.stringify(booklist));
-  });
+  }
 
-  if (teal) {
-    book.classList.add('teal');
-    removeBtn.classList.add('teal-btn');
-    teal = false;
-  } else {
-    teal = true;
-  };
+  appendToDOM(bookObj) {
+    const books = document.querySelector('.books');
+    const book = document.createElement('div');
+    book.classList.add('book');
+    book.innerHTML = `
+      <p>"${bookObj.title}" by ${bookObj.author}</p>
+      `;
 
-  book.appendChild(removeBtn);
-  books.appendChild(book);
+    const removeBtn = document.createElement('button');
+    removeBtn.innerHTML = 'Remove';
+    removeBtn.classList.add('remove-btn');
+    removeBtn.addEventListener('click', () => {
+      book.remove();
+      this.removeBook(bookObj);
+      localStorage.setItem('booklist', JSON.stringify(booklist));
+    });
+
+    if (this.teal) {
+      book.classList.add('teal');
+      removeBtn.classList.add('teal-btn');
+      this.teal = false;
+    } else {
+      this.teal = true;
+    };
+
+    book.appendChild(removeBtn);
+    books.appendChild(book);
+  }
 }
-
 // Check local storage for booklist
 
 if (localStorage.getItem('booklist') !== null) {
@@ -114,4 +107,4 @@ function addBook() {
 }
 addBookBtn.addEventListener('click', addBook);
 
-// 
+//
