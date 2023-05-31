@@ -3,7 +3,6 @@
 const section = document.querySelector('.books');
 const contact = document.querySelector('#contact');
 
-
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -122,8 +121,7 @@ formToggle.addEventListener('click', () => {
     const newBook = new Book(title, author);
     bookShelf.addBook(newBook);
     form.reset();
-});
-
+  });
 });
 
 const logo = document.querySelector('#logo');
