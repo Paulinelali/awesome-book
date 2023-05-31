@@ -68,8 +68,9 @@ input {
 }
 
 footer {
+  position: absolute;
+  bottom: 3px;
   border:1px solid rgb(0, 128, 128, 0.7);
-  margin-top: 64px;
 }
 
 .add-book {
@@ -137,4 +138,13 @@ p {
 .teal-btn:hover {
   background-color: #fff;
   color: teal;
+}
+
+.contact-padding{
+  padding: 0 25px;
+}
+
+.list-wrapper{
+  width: 75%;
+  padding: 0 0 0 25px;
 }

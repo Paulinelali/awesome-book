@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 const section = document.querySelector('.books');
+const contact = document.querySelector('#contact');
 
 class Book {
   constructor(title, author) {
@@ -30,6 +31,7 @@ class Bookshelf {
   }
 
   removeBook(book) {
+    
     let x = 0;
     for (let i = 0; i < this.booklist.length; i += 1) {
       if (this.booklist[i].title === book.title) {
@@ -38,6 +40,7 @@ class Bookshelf {
     }
     this.booklist.splice(x, 1);
     localStorage.setItem('booklist', JSON.stringify(this.booklist));
+    this.restockBookshelf();
   }
 
   appendToDOM(bookObj) {
@@ -131,4 +134,20 @@ const restockBtn = document.querySelector('#list');
 restockBtn.addEventListener('click', () => {
   bookShelf.restockBookshelf();
 });
-// bookShelf.restockBookshelf();
+
+function contacF() {
+  section.innerHTML = `
+  <h1>
+  Contact information
+</h1>
+<p class="contact-padding">Do you have any questions or you just want to say "Hello"? You can reach out to us!</p>
+<ul class="contact-padding list-wrapper">
+  <li>Our e-mail: mail@mail.com</li>
+  <li>Our phone number: 0043586534422</li>
+  <li>Our address: StreetName 22, 84503 City, Country</li>
+</ul>
+  `  
+}
+
+contact.addEventListener('click', contacF)
+bookShelf.restockBookshelf();
