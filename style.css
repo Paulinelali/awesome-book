@@ -4,6 +4,44 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background-color: rgb(0, 128, 128, 0.7);
+  color: #fff;
+  padding-inline: 16px;
+}
+
+nav h1 {
+  margin-left: 32px;
+}
+
+nav h1:hover {
+  cursor: pointer;
+  color: rgb(0, 65, 65);
+  transform: scale(1.1);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin-right: 16px;
+}
+
+nav ul li {
+  margin-inline: 16px;
+}
+
+nav ul li:hover {
+  cursor: pointer;
+  color: rgb(0, 65, 65);
+  transform: scale(1.2);
 }
 
 hr {
@@ -29,6 +67,12 @@ input {
   height: 30px;
 }
 
+footer {
+  position: absolute;
+  bottom: 3px;
+  border: 1px solid rgb(0, 128, 128, 0.7);
+}
+
 .add-book {
   align-self: flex-end;
   border: 2px solid teal;
@@ -48,7 +92,9 @@ p {
 }
 
 .books {
-  border: 2px solid teal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
@@ -61,6 +107,7 @@ p {
   align-items: center;
   border-bottom: 1px solid;
   padding-top: 12px;
+  width: 100%;
 }
 
 .book p {
@@ -91,4 +138,13 @@ p {
 .teal-btn:hover {
   background-color: #fff;
   color: teal;
+}
+
+.contact-padding {
+  padding: 0 25px;
+}
+
+.list-wrapper {
+  width: 75%;
+  padding: 0 0 0 25px;
 }

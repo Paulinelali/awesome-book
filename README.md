@@ -121,8 +121,8 @@ N/A
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] More styling
-- [ ] Navigation
+- [x] More styling
+- [x] Navigation
 - [ ] Add star rating for books
 
 
