@@ -4,6 +4,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   overflow-x: hidden;
 }
 
@@ -42,6 +43,7 @@ nav ul li:hover {
   cursor: pointer;
   color: rgb(0, 65, 65);
   transform: scale(1.2);
+
 }
 
 hr {
@@ -67,11 +69,13 @@ input {
   height: 30px;
 }
 
+
 footer {
   position: absolute;
   bottom: 3px;
   border:1px solid rgb(0, 128, 128, 0.7);
 }
+
 
 .add-book {
   align-self: flex-end;
@@ -92,6 +96,7 @@ p {
 }
 
 .books {
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,10 +109,16 @@ p {
 
 .book {
   display: flex;
+
   align-items: center;
   border-bottom: 1px solid;
   padding-top: 12px;
   width: 100%;
+}
+
+.book p {
+  width: 90%;
+  margin-left: 8px;
 }
 
 .book p {
