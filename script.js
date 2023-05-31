@@ -16,7 +16,6 @@ class Book {
 
   getAuthor() {
     return this.author;
-
   }
 }
 
@@ -34,7 +33,6 @@ class Bookshelf {
   }
 
   removeBook(book) {
-    
     let x = 0;
     for (let i = 0; i < this.booklist.length; i += 1) {
       if (this.booklist[i].title === book.title) {
@@ -124,7 +122,7 @@ formToggle.addEventListener('click', () => {
     const newBook = new Book(title, author);
     bookShelf.addBook(newBook);
     form.reset();
-  });
+});
 
 });
 
@@ -149,8 +147,8 @@ function contacF() {
   <li>Our phone number: 0043586534422</li>
   <li>Our address: StreetName 22, 84503 City, Country</li>
 </ul>
-  `  
+  `;
 }
 
-contact.addEventListener('click', contacF)
+contact.addEventListener('click', contacF);
 bookShelf.restockBookshelf();
