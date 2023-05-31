@@ -1,6 +1,8 @@
 /* eslint-disable max-classes-per-file */
+
 const section = document.querySelector('.books');
 const contact = document.querySelector('#contact');
+
 
 class Book {
   constructor(title, author) {
@@ -14,6 +16,7 @@ class Book {
 
   getAuthor() {
     return this.author;
+
   }
 }
 
